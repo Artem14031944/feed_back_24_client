@@ -1,0 +1,17 @@
+.wrapper_form {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin-top: 200px;
+}
+
+.container_form {
+    display: flex;
+    flex-direction: column;
+    row-gap: 15px;
+    border: 2px solid #93BAE9;
+    padding: 15px;
+    border-radius: 8px;
+    width: 320px;
+}

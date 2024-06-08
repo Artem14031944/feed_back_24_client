@@ -1,25 +1,45 @@
-import { FC, FormEvent, useContext, useState } from 'react';
+import { FC, ChangeEvent, useState } from 'react';
+import { SelectChangeEvent } from '@mui/material/Select';
 import { observer } from 'mobx-react-lite';
-import { Context } from '../..';
+import SwitchCroup from './components/SwitchCroup';
+import ButtonsForm from './components/ButtonsForm';
+import FiledsForm from './components/FiledsForm';
+import './style.css';
 
  const LoginForm: FC = () => {
+  const [name, setName] = useState<string>('');
+  const [role, setRole] = useState<string>('USER');
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
-  const { store } = useContext(Context);
- 
-  const handleEmail = (e: FormEvent<HTMLInputElement>) => setEmail(e.currentTarget.value);
-  const handlePassword = (e: FormEvent<HTMLInputElement>) => setPassword(e.currentTarget.value);
-  const login = () => store.login(email, password);
-  const registration = () => store.registration(email, password);
+  const [typeAuth, setTypeAuth] = useState<string>('login');
+
+  const handleRole = (e: SelectChangeEvent) => setRole(e.target.value);
+  const handleName = (e: ChangeEvent<HTMLInputElement>) => setName(e.currentTarget.value);
+  const handleEmail = (e: ChangeEvent<HTMLInputElement>) => setEmail(e.currentTarget.value);
+  const handlePassword = (e: ChangeEvent<HTMLInputElement>) => setPassword(e.currentTarget.value);
+
+  const listAuth = [
+    { id: 1, value: 'login', label: 'Логин' },
+    { id: 2, value: 'registration', label: 'Регистрация' },
+  ];
+
+  const listRoles = [
+    { id: 1, value: 'ADMIN', label: 'Админ' },
+    { id: 2, value: 'USER', label: 'Пользователь' },
+  ];
+
+  const propsButtonsForm = { email, password, name, role, typeAuth };
+  const propsFiledsForm = { ...propsButtonsForm, listRoles, handleName, handleRole, handleEmail, handlePassword };
 
   return (
-    <div>
-      <input type='text' value={email} onChange={handleEmail} placeholder='Email'/>
-      <input type='password' value={password} onChange={handlePassword} placeholder='Пароль'/>
-      <button onClick={login}>Логин</button>
-      <button onClick={registration}>Регистрация</button>
+    <div className='wrapper_form'>
+      <div className='container_form'>
+        <SwitchCroup listFormConrolLabel={listAuth} onChange={setTypeAuth} value={typeAuth}/>
+        <FiledsForm {...propsFiledsForm}/>
+        <ButtonsForm {...propsButtonsForm}/>
+      </div>
     </div>
-  )
+  );
 };
 
 export default observer(LoginForm);

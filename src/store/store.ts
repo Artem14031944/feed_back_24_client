@@ -1,8 +1,7 @@
-import { IAuthResponse } from "../common/models/response/AuthResponse";
-import { IUser } from "../common/models/IUser";
+import { IAuthResponse, IUser } from "../common/models/response/UserResponse";
 import { makeAutoObservable } from "mobx";
 import { API_URL } from "../common/http";
-import AuthService from "../common/services/AuthService";
+import UserService from "../common/services/UserService";
 import axios from "axios";
 
 export default class Store {
@@ -28,7 +27,7 @@ export default class Store {
 
     async login(email: string, password: string) {
         try {
-            const response = await AuthService.login(email, password);
+            const response = await UserService.login(email, password);
             console.log(response, 'res log');
             
             localStorage.setItem('token', response.data.accessToken);
@@ -41,7 +40,7 @@ export default class Store {
 
     async registration(email: string, password: string) {
         try {
-            const response = await AuthService.registration(email, password);
+            const response = await UserService.registration(email, password);
             console.log(response, 'res registration');
             localStorage.setItem('token', response.data.accessToken);
             this.setAuth(true);
@@ -53,7 +52,7 @@ export default class Store {
 
     async loguot() {
         try {
-            await AuthService.logout();
+            await UserService.logout();
             localStorage.removeItem('token');
             this.setAuth(false);
             this.setUser({} as IUser);
