@@ -1,15 +1,14 @@
-import { ChangeEvent, ReactElement, cloneElement, forwardRef, useContext, useState } from 'react';
+import { ChangeEvent, ReactElement, cloneElement, forwardRef, useState } from 'react';
 import { IApplicationResponse } from '../../../../common/models/response/ApplicationResponse';
 import { useSpring, animated } from '@react-spring/web';
 import { TextField } from '@mui/material';
-import { Context } from '../../../..';
 import Backdrop from '@mui/material/Backdrop';
 import Button from '@mui/material/Button';
 import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
 import ApplicationService from '../../../../common/services/ApplicationService';
 
-interface FadeProps {
+type FadeProps = {
   children: ReactElement,
   in?: boolean,
   onClick?: any,
@@ -63,7 +62,6 @@ const style = {
 };
   
 export default function CheckApplication(props: TypeModal) {
-  const { store } = useContext(Context);
   const { isOpen, setOpen, application, setApplications } = props;
   const [comment, setComment] = useState<string>(application.comment ?? '');
 
@@ -73,7 +71,6 @@ export default function CheckApplication(props: TypeModal) {
   const checkApplication = async () => {
     if (!application ||  !comment) return;
 
-    store.resolved(application.id, comment);    
     const respons = await ApplicationService.resolved(application.id, comment);    
     setApplications(respons?.data.applications)
     setComment('');
