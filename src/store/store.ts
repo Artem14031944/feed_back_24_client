@@ -1,6 +1,8 @@
+import { IApplicationResponse } from "../common/models/response/ApplicationResponse";
 import { IAuthResponse, IUser } from "../common/models/response/UserResponse";
 import { makeAutoObservable } from "mobx";
 import { API_URL } from "../common/http";
+import ApplicationService from "../common/services/ApplicationService";
 import UserService from "../common/services/UserService";
 import axios from "axios";
 
@@ -8,7 +10,8 @@ export default class Store {
     user = {} as IUser;
     isAuth = false;
     isLoading = false;
-    
+    message = '';
+        
     constructor() {
         makeAutoObservable(this);
     };
@@ -25,11 +28,13 @@ export default class Store {
         this.isLoading = isLoading;
     };
 
+    setMessage(message: string) {
+        this.message = message;
+    };
+  
     async login(email: string, password: string) {
         try {
-            const response = await UserService.login(email, password);
-            console.log(response, 'res log');
-            
+            const response = await UserService.login(email, password);     
             localStorage.setItem('token', response.data.accessToken);
             this.setAuth(true);
             this.setUser(response.data.user);
@@ -38,13 +43,29 @@ export default class Store {
         }
     };
 
-    async registration(email: string, password: string) {
+    async registration(email: string, password: string, name: string, role: string) {
         try {
-            const response = await UserService.registration(email, password);
-            console.log(response, 'res registration');
+            const response = await UserService.registration(email, password, name, role);
             localStorage.setItem('token', response.data.accessToken);
             this.setAuth(true);
             this.setUser(response.data.user);
+        } catch (e: any) {
+            console.log(e?.response?.data?.message);
+        }
+    };
+
+    async createApplication(user_id: number, message: string) {
+        try {
+            const response = await ApplicationService.createApplication(user_id, message);
+        } catch (e: any) {
+            console.log(e?.response?.data?.message);
+        }
+    };
+
+    async resolved(id: number, comment: string) {
+        try {
+            const response = await ApplicationService.resolved(id, comment);
+            this.setMessage(response.data.message);
         } catch (e: any) {
             console.log(e?.response?.data?.message);
         }

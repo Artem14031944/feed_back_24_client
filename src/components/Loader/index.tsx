@@ -3,8 +3,8 @@ import './style.css';
 
  const Loader: FC = () => {
   return (
-    <div className="lds-circle">
-        <div/>
+    <div className='wrapper_loader'>
+      <div className="lds-dual-ring"></div>
     </div>
   );
 };

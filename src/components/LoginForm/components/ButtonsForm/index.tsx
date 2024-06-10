@@ -1,4 +1,4 @@
-import { FC, useContext } from 'react'
+import { useContext } from 'react'
 import { observer } from 'mobx-react-lite';
 import { Button } from '@mui/material';
 import { Context } from '../../../..';
@@ -28,7 +28,7 @@ const ButtonsForm = (props: TypeButtonsForm) => {
       return;
     };
 
-    store.registration(email, password);
+    store.registration(email, password, name, role);
   };
 
   return (

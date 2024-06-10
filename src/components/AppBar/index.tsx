@@ -10,7 +10,6 @@ import Box from '@mui/material/Box';
 
 export default function ResponsiveAppBar() {
   const { store } = useContext(Context);
-
   const logOut = () => store.loguot();
 
   return (
