@@ -1,4 +1,4 @@
-export interface IApplicationResponse {
+export type IApplicationResponse = {
     id: number,
     status: string,
     message: string,
@@ -9,12 +9,12 @@ export interface IApplicationResponse {
     updatedAt?: string,
 };
 
-export interface IApplicationMessageResponse {
+export type IApplicationMessageResponse = {
     message: string,
     applications: IApplicationResponse[],
 };
 
-export interface IApplicationCreateResponse {
+export type IApplicationCreateResponse = {
     id: number,
     status: string,
 	user_id: number,

@@ -1,28 +1,12 @@
-import { ChangeEvent, ReactElement, cloneElement, forwardRef, useState } from 'react';
-import { IApplicationResponse } from '../../../../../common/models/response/ApplicationResponse';
+import { ChangeEvent, cloneElement, forwardRef, useState } from 'react';
 import { useSpring, animated } from '@react-spring/web';
+import { FadeProps, TypeModal } from '../../../types';
 import { TextField } from '@mui/material';
 import Backdrop from '@mui/material/Backdrop';
 import Button from '@mui/material/Button';
 import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
 import ApplicationService from '../../../../../common/services/ApplicationService';
-
-type FadeProps = {
-  children: ReactElement,
-  in?: boolean,
-  onClick?: any,
-  onEnter?: (node: HTMLElement, isAppearing: boolean) => void,
-  onExited?: (node: HTMLElement, isAppearing: boolean) => void,
-  ownerState?: any,
-};
-
-type TypeModal = {
-  isOpen: boolean,
-  setOpen: (value: boolean) => void,
-  application: IApplicationResponse,
-  setApplications: (appliacations: IApplicationResponse[]) => void,
-};
 
 const Fade = forwardRef<HTMLDivElement, FadeProps>(function Fade(props, ref) {
   const { children, in: open, onClick, onEnter, onExited, ownerState, ...other} = props;
@@ -72,7 +56,7 @@ export default function CheckApplication(props: TypeModal) {
     if (!application ||  !comment) return;
 
     const respons = await ApplicationService.resolved(application.id, comment);    
-    setApplications(respons?.data.applications)
+    setApplications && setApplications(respons?.data.applications)
     setComment('');
     handleClose();
   };

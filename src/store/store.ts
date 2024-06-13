@@ -54,13 +54,13 @@ export default class Store {
         }
     };
 
-    async createApplication(user_id: number, message: string) {
-        try {
-           await ApplicationService.createApplication(user_id, message);
-        } catch (e: any) {
-            console.log(e?.response?.data?.message);
-        }
-    };
+    // async createApplication(user_id: number, message: string) {
+    //     try {
+    //         const response = await ApplicationService.createApplication(user_id, message);
+    //     } catch (e: any) {
+    //         console.log(e?.response?.data?.message);
+    //     }
+    // };
 
     async resolved(id: number, comment: string) {
         try {

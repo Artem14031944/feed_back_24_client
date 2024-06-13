@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { IApplicationResponse } from '../../../../../../common/models/response/ApplicationResponse';
 import { translationStatus } from '../../../../../../common/translat';
+import { TypeTable } from '../../../../types';
 import { Box, Link } from '@mui/material';
 import { format } from 'date-fns';
 import TableContainer from '@mui/material/TableContainer';
@@ -22,13 +23,8 @@ const columns = [
   { id: 6, title: 'Ответить' },
 ];
 
-type TypeTable = {
-  rows: IApplicationResponse[],
-  setApplications: (applications: IApplicationResponse[]) => void,
-};
-
 const TableApplications = (props: TypeTable) => {
-  const { rows, setApplications } = props;
+  const { applications, setApplications } = props;
   const [selectedApplication, setSelectedApplication] = useState<IApplicationResponse>({} as IApplicationResponse);
   const [isOpenModal, setOpenModal] = useState<boolean>(false);
   
@@ -47,17 +43,17 @@ const TableApplications = (props: TypeTable) => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {rows.map((row) => (
-              <TableRow key={row.id} sx={{ '&:last-child td, &:last-child th':{ border: 0 } }}>
+            {applications?.map((application) => (
+              <TableRow key={application.id} sx={{ '&:last-child td, &:last-child th':{ border: 0 } }}>
                 <TableCell component="th" scope="row" sx={{ cursor: 'pointer' }}>
-                  <Link href={`mailto:${row.email}`}>{row.email}</Link>
+                  <Link href={`mailto:${application.email}`}>{application.email}</Link>
                 </TableCell>
-                <TableCell align="left">{row.message}</TableCell>
-                <TableCell align="left">{row.comment}</TableCell>
-                <TableCell align="left">{translationStatus[row.status]}</TableCell>
-                <TableCell align="left">{format(row.createdAt, 'dd.MM.yyyy')}</TableCell>
+                <TableCell align="left">{application.message}</TableCell>
+                <TableCell align="left">{application.comment}</TableCell>
+                <TableCell align="left">{translationStatus[application.status]}</TableCell>
+                <TableCell align="left">{format(application.createdAt, 'dd.MM.yyyy')}</TableCell>
                 <TableCell align="left" >
-                  <EditIcon sx={{ cursor: 'pointer' }} onClick={handleOpen(row)}/>
+                  <EditIcon sx={{ cursor: 'pointer' }} onClick={handleOpen(application)}/>
                 </TableCell>
               </TableRow>
             ))}

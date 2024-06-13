@@ -21,13 +21,13 @@ const Admin = () => {
 
   useEffect(() => {
     if (store.user.role === 'ADMIN') { 
-        getApplications() 
+      getApplications() 
     };
   }, []);
 
   return (
     <Box className={styles.wrapper}>
-      <TableApplications rows={applications} setApplications={setApplications}/>
+      <TableApplications applications={applications} setApplications={setApplications}/>
       <Button variant='contained' onClick={getApplications}>Получить заявки</Button>
     </Box>
   );
