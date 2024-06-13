@@ -1,0 +1,6 @@
+.row_text_hiden p {
+    white-space: nowrap; 
+    overflow: hidden; 
+    text-overflow: ellipsis;
+    width: 300px;
+}

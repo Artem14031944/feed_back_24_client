@@ -1,12 +1,12 @@
 import { ChangeEvent, ReactElement, cloneElement, forwardRef, useState } from 'react';
-import { IApplicationResponse } from '../../../../common/models/response/ApplicationResponse';
+import { IApplicationResponse } from '../../../../../common/models/response/ApplicationResponse';
 import { useSpring, animated } from '@react-spring/web';
 import { TextField } from '@mui/material';
 import Backdrop from '@mui/material/Backdrop';
 import Button from '@mui/material/Button';
 import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
-import ApplicationService from '../../../../common/services/ApplicationService';
+import ApplicationService from '../../../../../common/services/ApplicationService';
 
 type FadeProps = {
   children: ReactElement,

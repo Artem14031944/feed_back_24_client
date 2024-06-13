@@ -1,11 +1,11 @@
 import { useContext, useEffect } from 'react';
 import { observer } from 'mobx-react-lite';
+import { Box } from '@mui/material';
 import { Context } from '.';
 import InterfaceApplication from './components/InterfaceApplication';
 import ResponsiveAppBar from './components/AppBar';
 import LoginForm from './components/LoginForm';
 import Loader from './components/Loader';
-import './App.css';
 
 function App() {
   const { store } = useContext(Context);
@@ -20,10 +20,10 @@ function App() {
   if (!store.isAuth) { return <LoginForm/> };
   
   return (
-    <div className="App">
+    <Box>
       <ResponsiveAppBar/>
       <InterfaceApplication/>
-    </div>
+    </Box>
   );
 }
 

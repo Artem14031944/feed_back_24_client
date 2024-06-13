@@ -6,6 +6,7 @@ export interface IApplicationResponse {
     email: string,
     role: string,
     createdAt: string,
+    updatedAt?: string,
 };
 
 export interface IApplicationMessageResponse {

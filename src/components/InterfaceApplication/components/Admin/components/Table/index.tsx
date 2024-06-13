@@ -1,9 +1,10 @@
 import { useState } from 'react';
-import { IApplicationMessageResponse, IApplicationResponse } from '../../../../common/models/response/ApplicationResponse';
-import { Link } from '@mui/material';
+import { IApplicationResponse } from '../../../../../../common/models/response/ApplicationResponse';
+import { translationStatus } from '../../../../../../common/translat';
+import { Box, Link } from '@mui/material';
 import { format } from 'date-fns';
 import TableContainer from '@mui/material/TableContainer';
-import CheckApplication from '../Modals/CheckApplication';
+import CheckApplication from '../../Modals/CheckApplication';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
 import TableHead from '@mui/material/TableHead';
@@ -12,34 +13,32 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import Table from '@mui/material/Table';
 
-type TypeTableColumn = {
-  id: number,
-  title: string,
-};
+const columns = [
+  { id: 1, title: 'Email' },
+  { id: 2, title: 'Заявка' },
+  { id: 3, title: 'Ответ на заявку' },
+  { id: 4, title: 'Статус' },
+  { id: 5, title: 'Время создание' },
+  { id: 6, title: 'Ответить' },
+];
 
 type TypeTable = {
-  columns: TypeTableColumn[],
   rows: IApplicationResponse[],
   setApplications: (applications: IApplicationResponse[]) => void,
 };
 
 const TableApplications = (props: TypeTable) => {
-  const { columns, rows, setApplications } = props;
-  const [application, setApplication] = useState<IApplicationResponse>({} as IApplicationResponse);
+  const { rows, setApplications } = props;
+  const [selectedApplication, setSelectedApplication] = useState<IApplicationResponse>({} as IApplicationResponse);
   const [isOpenModal, setOpenModal] = useState<boolean>(false);
   
   const handleOpen = (application: IApplicationResponse) => () => {    
     setOpenModal(true);
-    setApplication(application);
+    setSelectedApplication(application);
   };
 
-  const translationStatus = {
-    Resolved: 'Решено',
-    Active: 'Активный',
-  } as {[key: string]: string};
-
   return (
-    <div>
+    <Box>
       <TableContainer component={Paper}sx={{ minWidth: 650, maxWidth: 1000 }}>
         <Table  aria-label="simple table">
           <TableHead>
@@ -69,10 +68,10 @@ const TableApplications = (props: TypeTable) => {
         <CheckApplication 
           isOpen={isOpenModal} 
           setOpen={setOpenModal} 
-          application={application}
+          application={selectedApplication}
           setApplications={setApplications}
       />}
-    </div>
+    </Box>
   );
 };
 

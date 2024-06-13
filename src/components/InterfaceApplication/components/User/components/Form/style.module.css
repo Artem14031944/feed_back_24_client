@@ -1,0 +1,11 @@
+.input {
+    width: 382px;
+    margin-top: 8px; 
+}
+
+.block_button {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 8px; 
+}
