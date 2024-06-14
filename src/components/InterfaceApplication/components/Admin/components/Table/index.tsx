@@ -4,8 +4,8 @@ import { translationStatus } from '../../../../../../common/translat';
 import { TypeTable } from '../../../../types';
 import { Box, Link } from '@mui/material';
 import { format } from 'date-fns';
+import CheckApplicationModal from '../../Modals/CheckApplicationModal';
 import TableContainer from '@mui/material/TableContainer';
-import CheckApplication from '../../Modals/CheckApplication';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
 import TableHead from '@mui/material/TableHead';
@@ -61,7 +61,7 @@ const TableApplications = (props: TypeTable) => {
         </Table>
       </TableContainer>
       {isOpenModal && 
-        <CheckApplication 
+        <CheckApplicationModal 
           isOpen={isOpenModal} 
           setOpen={setOpenModal} 
           application={selectedApplication}

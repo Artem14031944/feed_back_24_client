@@ -1,0 +1,12 @@
+.toaster {
+    width: 100%;
+    min-width: 230px;
+    height: 100%;
+    min-height: 52px;
+    background: #fff;
+    border: 2px solid #1876D2; 
+    border-radius: 8px;
+    text-align: center;
+    font-size: 19px;
+    padding: 3px;
+}

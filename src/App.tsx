@@ -4,6 +4,7 @@ import { Box } from '@mui/material';
 import { Context } from '.';
 import InterfaceApplication from './components/InterfaceApplication';
 import ResponsiveAppBar from './components/AppBar';
+import MyToastr from './common/components/Toastr';
 import LoginForm from './components/LoginForm';
 import Loader from './components/Loader';
 
@@ -23,6 +24,7 @@ function App() {
     <Box>
       <ResponsiveAppBar/>
       <InterfaceApplication/>
+      <MyToastr/>
     </Box>
   );
 }
