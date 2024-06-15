@@ -1,25 +1,32 @@
 import { ChangeEvent, useContext, useState } from 'react';
-import { Box, Button, TextField } from '@mui/material';
+import { Box, TextField } from '@mui/material';
+import { LoadingButton } from '@mui/lab';
 import { TypeTable } from '../../../../types';
 import { Context } from '../../../../../..';
 import { observer } from 'mobx-react-lite';
-import ApplicationService from '../../../../../../common/services/ApplicationService';
 import styles from './style.module.css';
+import toast from 'react-hot-toast';
 
 const Form = (props: TypeTable) => {
   const { setApplications } = props;
   const { store } = useContext(Context);
   const [message, setMessage] = useState<string>('');
-
-  const sendApplication = async () => {
-    if (!message || !store.user.id) return;
-    try {
-      const respons = await ApplicationService.createApplication(store.user.id, message);
+  const [isLoading, setLoading] = useState<boolean>(false);
+  
+  const sendApplication = () => {
+    // if (!message || !store.user.id) return;
+    
+    setLoading(true);
+   
+    store.createApplication(store.user.id, message)
+    .then(res => {
+      console.log(res)
       setMessage('');
-      setApplications && setApplications(respons.data);
-    } catch(err) {
-      console.log(err);
-    }    
+      setApplications && setApplications(res.data.applications);
+      toast.success(res.data.message)
+    })
+    .catch(err => toast.error(err))
+    .finally(() => setLoading(false));  
   };
 
   const onChange = (e: ChangeEvent<HTMLInputElement>) => setMessage(e.currentTarget.value);  
@@ -36,7 +43,13 @@ const Form = (props: TypeTable) => {
       onChange={onChange}
     />
     <Box className={styles.block_button}>
-     <Button variant='contained' onClick={sendApplication}>Оправить</Button>
+     <LoadingButton 
+       variant={'contained'} 
+       loading={isLoading} 
+       onClick={sendApplication}
+      >
+        Оправить
+      </LoadingButton>
     </Box>
    </Box>
   );

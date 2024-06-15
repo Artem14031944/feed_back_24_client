@@ -11,8 +11,8 @@ export default class ApplicationService {
         return $api.patch<IApplicationMessageResponse>(`/application/resolved/${id}`, { comment });
     };
 
-    static async createApplication(user_id: number, message: string): Promise<AxiosResponse<IApplicationResponse[]>> {
-        return $api.post<IApplicationResponse[]>('/application/create', { user_id, message });
+    static async createApplication(user_id: number, message: string): Promise<AxiosResponse<IApplicationMessageResponse>> {
+        return $api.post<IApplicationMessageResponse>('/application/create', { user_id, message });
     };
 
     static async getЕheirApplications(user_id: number): Promise<AxiosResponse<IApplicationResponse[]>> {

@@ -23,10 +23,10 @@ export default function CheckApplicationModal(props: TypeModal & TypeTable &  { 
 
     store.resolved(application.id, comment)
     .then(res => {
-      setApplications && setApplications(res?.data.applications);
+      setApplications && setApplications(res.data.applications);
       setComment('');
       handleClose();
-      toast.success(res?.data.message);
+      toast.success(res.data.message);
     })
     .catch(err => toast.error(err))
     .finally(() => setLoading(false));

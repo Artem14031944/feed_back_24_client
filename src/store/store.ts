@@ -77,6 +77,15 @@ export default class Store {
         }
     };
 
+    async createApplication(user_id: number, message: string) {
+        try {
+            const respons = await ApplicationService.createApplication(user_id, message);
+            return respons;
+        } catch(e:any) {
+            throw e?.response?.data?.message;
+        }
+    };
+
     async checkAuth() {
         this.setLoading(true);
         try {
