@@ -1,10 +1,12 @@
 import { FC, ChangeEvent, useState } from 'react';
 import { SelectChangeEvent } from '@mui/material/Select';
 import { observer } from 'mobx-react-lite';
+import { Box } from '@mui/material';
+import MyToastr from '../../common/components/Toastr';
 import SwitchCroup from './components/SwitchCroup';
 import ButtonsForm from './components/ButtonsForm';
 import FiledsForm from './components/FiledsForm';
-import './style.css';
+import styles from  './style.module.css';
 
  const LoginForm: FC = () => {
   const [name, setName] = useState<string>('');
@@ -32,13 +34,14 @@ import './style.css';
   const propsFiledsForm = { ...propsButtonsForm, listRoles, handleName, handleRole, handleEmail, handlePassword };
 
   return (
-    <div className='wrapper_form'>
-      <div className='container_form'>
+    <Box className={styles.wrapper_form}>
+      <Box className={styles.container_form}>
         <SwitchCroup listFormConrolLabel={listAuth} onChange={setTypeAuth} value={typeAuth}/>
         <FiledsForm {...propsFiledsForm}/>
         <ButtonsForm {...propsButtonsForm}/>
-      </div>
-    </div>
+        <MyToastr/>
+      </Box>
+    </Box>
   );
 };
 

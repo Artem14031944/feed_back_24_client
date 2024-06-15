@@ -1,9 +1,9 @@
 import React from 'react';
-import toast, { ToastPosition, Toaster } from 'react-hot-toast';
+import { ToastPosition, Toaster } from 'react-hot-toast';
 import styles from './style.module.css';
 
 type TypeToastr = {
-    position?: ToastPosition,
+  position?: ToastPosition,
 };
 
 export default function MyToastr(props: TypeToastr) {
@@ -15,16 +15,20 @@ export default function MyToastr(props: TypeToastr) {
       toastOptions={{
         className: styles.toaster,
         success: {
-            style: {
-                color: 'black',
-            },
-            icon: ''
+          style: {
+            color: 'black',
+            background: '#fb9090',
+            borderColor: '#fb9090'
+          },
+          icon: ''
         },
         error: {
-            style: {
-                color: 'red',
-            },
-            icon: ''
+          style: {
+            color: 'red',
+            background: '#f1c0c0',
+            borderColor: 'red'
+          },
+          icon: ''
         },
       }}
     />

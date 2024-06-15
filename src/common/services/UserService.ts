@@ -15,4 +15,3 @@ export default class UserService {
         return $api.post('/user/logout');
     };
 };
-

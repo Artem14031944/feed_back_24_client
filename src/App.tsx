@@ -17,8 +17,8 @@ function App() {
     }
   },[]);
   
-  if (store.isLoading) { return <Loader/> };
-  if (!store.isAuth) { return <LoginForm/> };
+  if (store.isLoading) return <Loader/>;
+  if (!store.isAuth) return <LoginForm/>;
   
   return (
     <Box>
@@ -27,6 +27,6 @@ function App() {
       <MyToastr/>
     </Box>
   );
-}
+};
 
 export default observer(App);

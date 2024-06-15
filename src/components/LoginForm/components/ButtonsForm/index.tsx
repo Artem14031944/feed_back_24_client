@@ -1,7 +1,8 @@
 import { useContext } from 'react'
 import { observer } from 'mobx-react-lite';
-import { Button } from '@mui/material';
+import { Box, Button } from '@mui/material';
 import { Context } from '../../../..';
+import toast from 'react-hot-toast';
 
 type TypeButtonsForm = {
   typeAuth: string,
@@ -16,27 +17,23 @@ const ButtonsForm = (props: TypeButtonsForm) => {
   const { email, password, name, role } = props;
 
   const login = () => {
-    if (!email || !password) {
-      return;
-    };
-
-    store.login(email, password);
+    store.login(email, password)
+    .then(() => toast.success('Вход выполнен'))
+    .catch(err => toast.error(err));
   };
 
   const registration = () => {
-    if (!email || !password || !name || !role) {
-      return;
-    };
-
-    store.registration(email, password, name, role);
+    store.registration(email, password, name, role)
+    .then(() => toast.success('Вход выполнен'))
+    .catch(err => toast.error(err));
   };
 
   return (
-    <div>
+    <Box>
       {props.typeAuth === 'login' && <Button onClick={login} variant="contained">Войти</Button>} 
-      {props.typeAuth === 'registration' &&  <Button onClick={registration} variant="contained">Регистрация</Button>} 
-    </div>
-  )
-}
+      {props.typeAuth === 'registration' && <Button onClick={registration} variant="contained">Регистрация</Button>} 
+    </Box>
+  );
+};
 
 export default observer(ButtonsForm);
