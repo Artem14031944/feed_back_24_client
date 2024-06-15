@@ -16,17 +16,17 @@ export default function MyToastr(props: TypeToastr) {
         className: styles.toaster,
         success: {
           style: {
-            color: 'black',
-            background: '#fb9090',
-            borderColor: '#fb9090'
+            color: 'white',
+            background: '#75afff',
+            borderColor: '#75afff'
           },
           icon: ''
         },
         error: {
           style: {
             color: 'red',
-            background: '#f1c0c0',
-            borderColor: 'red'
+            background: '#fb9090',
+            borderColor: '#fb9090'
           },
           icon: ''
         },
