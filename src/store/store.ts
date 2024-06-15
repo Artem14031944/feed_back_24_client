@@ -50,9 +50,10 @@ export default class Store {
 
     async resolved(id: number, comment: string) {
         try {
-            await ApplicationService.resolved(id, comment);
-        } catch (e: any) {
-            console.log(e?.response?.data?.message);
+            const response = await ApplicationService.resolved(id, comment);
+            return response;
+        } catch (e: any) {   
+            throw e?.response?.data?.message;
         }
     };
 
@@ -63,7 +64,16 @@ export default class Store {
             this.setAuth(false);
             this.setUser({} as IUser);
         } catch (e: any) {
-            console.log(e?.response?.data?.message);
+            throw e?.response?.data?.message;
+        }
+    };
+
+    async getApplications() {
+        try {
+            const response = await ApplicationService.fetchApllication();
+            return response;
+        }  catch (e: any) {
+            throw e?.response?.data?.message;
         }
     };
 
@@ -75,9 +85,9 @@ export default class Store {
             this.setAuth(true);
             this.setUser(response.data.user);
         } catch (e: any) {
-            console.log(e?.response?.data?.message);
+            throw e?.response?.data?.message;
         } finally {
             this.setLoading(false);
         }
     };
-}
+};

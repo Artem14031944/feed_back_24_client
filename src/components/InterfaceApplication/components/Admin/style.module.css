@@ -6,3 +6,10 @@
     margin-top: 100px;
     row-gap: 15px;
 }
+
+.block_button {
+    width: 100%;
+    max-width: 1200px;
+    display: flex;
+    justify-content: flex-end;
+}
