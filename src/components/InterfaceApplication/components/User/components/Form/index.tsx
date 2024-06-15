@@ -14,13 +14,9 @@ const Form = (props: TypeTable) => {
   const [isLoading, setLoading] = useState<boolean>(false);
   
   const sendApplication = () => {
-    // if (!message || !store.user.id) return;
-    
-    setLoading(true);
-   
+    setLoading(true);   
     store.createApplication(store.user.id, message)
     .then(res => {
-      console.log(res)
       setMessage('');
       setApplications && setApplications(res.data.applications);
       toast.success(res.data.message)
